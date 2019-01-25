@@ -31,6 +31,11 @@ then
 
     helm repo add gitlab https://charts.gitlab.io
     helm repo update
+    kubectl create secret generic s3access \
+      --from-literal=accesskey="myaccesskey" \
+      --from-literal=secretkey="musecretkey"
+
+    helm install --namespace gitlab-ci --name gitlab-mino --set accessKey=myaccesskey,secretKey=mysecretkey stable/minio
     helm install --namespace gitlab-ci --name gitlab-runner -f values.yaml gitlab/gitlab-runner
 else
   echo "DONE"

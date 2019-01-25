@@ -9,3 +9,39 @@ runners:
   ## ref: https://docs.gitlab.com/runner/executors/kubernetes.html#using-docker-dind
   ##
   privileged: true
+  ## Build Container specific configuration
+  ##
+builds:
+  cpuLimit: 200m
+  memoryLimit: 4096Mi
+  #cpuRequests: 100m
+  #memoryRequests: 128Mi
+
+## Service Container specific configuration
+##
+services:
+  cpuLimit: 200m
+  memoryLimit: 1024Mi
+  #cpuRequests: 100m
+  #memoryRequests: 128Mi
+
+## Helper Container specific configuration
+##
+helpers:
+  cpuLimit: 200m
+  memoryLimit: 1024Mi
+  #cpuRequests: 100m
+  #memoryRequests: 128Mi	
+
+cache:
+  ## General settings
+  cacheType: s3
+  cachePath: "gitlab_runner"
+  cacheShared: true
+
+  ## S3 settings
+  s3ServerAddress: s3.amazonaws.com
+  s3BucketName: gitlab-ci
+  s3CacheInsecure: false
+  secretName: s3access
+	
