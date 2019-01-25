@@ -13,7 +13,15 @@ var=$(cat <<EOF
 }
 EOF
 )
+
+# SED the $gitlab_url and token from the values.yaml to correct values
+GITLAB_URL=$(echo $GITLAB_URL | sed "s:/:\\/:g")
+
+sed -i "s/GITLAB_URL/${GITLAB_URL}/g" values.yaml
+sed -i "s/GITLAB_REGISTRATION_TOKEN/${GITLAB_REGISTRATION_TOKEN}/g" values.yaml
+
 echo $var > credential_key.json
+
 gcloud auth activate-service-account --key-file=credential_key.json
 gcloud config set project ${PROJECT}
 ./gke_bootstrap_script.sh ${TYPE}
