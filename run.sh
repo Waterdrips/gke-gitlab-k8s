@@ -14,11 +14,6 @@ var=$(cat <<EOF
 EOF
 )
 
-# SED the $gitlab_url and token from the values.yaml to correct values
-GITLAB_URL=$(echo $GITLAB_URL | sed "s:/:\\/:g")
-
-sed -i "s/GITLAB_URL/${GITLAB_URL}/g" values.yaml
-sed -i "s/GITLAB_REGISTRATION_TOKEN/${GITLAB_REGISTRATION_TOKEN}/g" values.yaml
 
 echo $var > credential_key.json
 
@@ -28,6 +23,12 @@ gcloud config set project ${PROJECT}
 
 if [ ${TYPE} == "up" ]
 then
+    # SED the $gitlab_url and token from the values.yaml to correct values
+    GITLAB_URL=$(echo $GITLAB_URL | sed 's:/:\\/:g')
+    
+    sed -i "s/GITLAB_URL/${GITLAB_URL}/g" values.yaml
+    sed -i "s/GITLAB_REGISTRATION_TOKEN/${GITLAB_REGISTRATION_TOKEN}/g" values.yaml
+
     helm repo add gitlab https://charts.gitlab.io
     helm repo update
     helm install --namespace gitlab-ci --name gitlab-runner -f values.yaml gitlab/gitlab-runner
