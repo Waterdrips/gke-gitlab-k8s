@@ -2,7 +2,7 @@
 
 > docker image available from dockerhub: heyal/k8s-controller:latest
 
-###Need to set these env vars at the least:
+### Need to set these env vars at the least:
 The ones available from GCP as a download are found in  
 
 >IAM&Admin - Service Account - Create key
@@ -29,7 +29,7 @@ The ones available from GCP as a download are found in
 `GITLAB_URL`=[https://gitlab.com, or your gitlab instance url]
 
 
-###Available Env Vars to tune the cluster/properties:
+### Available Env Vars to tune the cluster/properties:
 `REGION` default us-central1
 
 `ZONE_EXTENSION` default b
@@ -49,7 +49,7 @@ The ones available from GCP as a download are found in
 `USE_STATIC_IP` default false
 
 
-###Example run command:
+### Example run command:
 ```
 docker run -i \
     -e "PROJECT=<PROJECT_ID>" \
