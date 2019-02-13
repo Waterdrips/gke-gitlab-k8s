@@ -64,7 +64,7 @@ docker run -i \
 heyal/k8s-controller:latest run.sh
 ```
 
-
+I have provided an up-to-date with master docker container build at the heyal/k8s-controller repository on dockerhub
 ### Building the docker container:
 
 `docker build -t <your_docker_repo>:tagname .`
